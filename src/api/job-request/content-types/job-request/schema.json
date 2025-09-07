@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "job_requests",
+  "info": {
+    "singularName": "job-request",
+    "pluralName": "job-requests",
+    "displayName": "Job Request"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "job": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::job.job",
+      "inversedBy": "job_requests"
+    },
+    "employee": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::employee.employee",
+      "inversedBy": "job_requests"
+    },
+    "Description": {
+      "type": "string"
+    },
+    "is_active": {
+      "type": "boolean"
+    },
+    "job_status": {
+      "type": "string"
+    }
+  }
+}

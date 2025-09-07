@@ -1,0 +1,57 @@
+{
+  "kind": "collectionType",
+  "collectionName": "jobs",
+  "info": {
+    "singularName": "job",
+    "pluralName": "jobs",
+    "displayName": "Job"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "employer": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employer.employer"
+    },
+    "start_date": {
+      "type": "date"
+    },
+    "end_date": {
+      "type": "date"
+    },
+    "budget": {
+      "type": "decimal"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "part-time",
+        "full-time"
+      ]
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "on-site",
+        "remote",
+        "freelance",
+        "project-based"
+      ]
+    },
+    "current_status": {
+      "type": "integer"
+    },
+    "job_requests": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::job-request.job-request",
+      "mappedBy": "job"
+    }
+  }
+}
