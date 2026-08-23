@@ -991,6 +991,7 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
+    employee: Schema.Attribute.Relation<'oneToOne', 'api::employee.employee'>;
     employer: Schema.Attribute.Relation<'oneToOne', 'api::employer.employer'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
