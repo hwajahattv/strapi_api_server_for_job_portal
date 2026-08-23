@@ -422,7 +422,7 @@ export interface ApiEmployerEmployer extends Struct.CollectionTypeSchema {
     singularName: 'employer';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     address: Schema.Attribute.String;

@@ -2,7 +2,7 @@ export default ({ env }) => {
 	// Debugging logs (prints in your terminal when Strapi starts)
 	console.log("SMTP_HOST:", env("SMTP_HOST"));
 	console.log("SMTP_PORT:", env("SMTP_PORT"));
-	console.log("SMTP_USER:", env("SMTP_USER"));
+	console.log("SMTP_USERfffffff:", env("SMTP_USER"));
 	console.log("SMTP_PASS (first 4):", env("SMTP_PASS")?.slice(0, 4));
 
 	return {
