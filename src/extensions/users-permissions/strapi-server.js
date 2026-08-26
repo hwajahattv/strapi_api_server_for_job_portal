@@ -11,7 +11,7 @@ export default (plugin) => {
             if (ctx.response?.body) {
                 ctx.response.body = {
                     ...ctx.response.body,
-                    message: "User registered successfully!",
+                    message: "Account created. Please check your email to confirm your account.",
                     status: "success",
                 };
             }

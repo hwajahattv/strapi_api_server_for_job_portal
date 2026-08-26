@@ -54,6 +54,12 @@ export default factories.createCoreController(
 				return ctx.unauthorized("You must be logged in");
 			}
 
+			if (!user.confirmed) {
+				return ctx.forbidden(
+					"Please confirm your email before becoming an employer",
+				);
+			}
+
 			// 2. Get request data
 			const { data } = ctx.request.body;
 

@@ -57,6 +57,12 @@ export default factories.createCoreController(
 				return ctx.unauthorized("You must be logged in");
 			}
 
+			if (!user.confirmed) {
+				return ctx.forbidden(
+					"Please confirm your email before becoming an employee",
+				);
+			}
+
 			// 2. Get the complete current user
 			const currentUser = await strapi.db
 				.query("plugin::users-permissions.user")
