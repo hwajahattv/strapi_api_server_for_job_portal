@@ -7,7 +7,7 @@
     "displayName": "Job"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
@@ -28,30 +28,30 @@
     "budget": {
       "type": "decimal"
     },
-    "type": {
+    "work_mode": {
       "type": "enumeration",
       "enum": [
-        "part-time",
-        "full-time"
-      ]
-    },
-    "category": {
-      "type": "enumeration",
-      "enum": [
-        "on-site",
         "remote",
-        "freelance",
-        "project-based"
+        "on-site",
+        "hybrid"
       ]
-    },
-    "current_status": {
-      "type": "integer"
     },
     "job_requests": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::job-request.job-request",
       "mappedBy": "job"
+    },
+    "job_type": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::job-type.job-type",
+      "inversedBy": "jobs"
+    },
+    "job_status": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::job-status.job-status"
     }
   }
 }

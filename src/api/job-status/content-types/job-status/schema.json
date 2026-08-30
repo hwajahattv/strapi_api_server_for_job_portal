@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "job_statuses",
+  "info": {
+    "singularName": "job-status",
+    "pluralName": "job-statuses",
+    "displayName": "Job Status"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "display_name": {
+      "type": "string"
+    },
+    "is_active": {
+      "type": "boolean"
+    },
+    "status_code": {
+      "type": "integer",
+      "unique": true
+    }
+  }
+}

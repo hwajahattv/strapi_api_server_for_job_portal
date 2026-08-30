@@ -485,6 +485,70 @@ export interface ApiJobRequestJobRequest extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiJobStatusJobStatus extends Struct.CollectionTypeSchema {
+  collectionName: 'job_statuses';
+  info: {
+    displayName: 'Job Status';
+    pluralName: 'job-statuses';
+    singularName: 'job-status';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    display_name: Schema.Attribute.String;
+    is_active: Schema.Attribute.Boolean;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::job-status.job-status'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    status_code: Schema.Attribute.Integer & Schema.Attribute.Unique;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiJobTypeJobType extends Struct.CollectionTypeSchema {
+  collectionName: 'job_types';
+  info: {
+    displayName: 'Job Type';
+    pluralName: 'job-types';
+    singularName: 'job-type';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    is_active: Schema.Attribute.Boolean;
+    jobs: Schema.Attribute.Relation<'oneToMany', 'api::job.job'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::job-type.job-type'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.String & Schema.Attribute.Unique;
+    sort_order: Schema.Attribute.Integer;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiJobJob extends Struct.CollectionTypeSchema {
   collectionName: 'jobs';
   info: {
@@ -493,33 +557,34 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
     singularName: 'job';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     budget: Schema.Attribute.Decimal;
-    category: Schema.Attribute.Enumeration<
-      ['on-site', 'remote', 'freelance', 'project-based']
-    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    current_status: Schema.Attribute.Integer;
     employer: Schema.Attribute.Relation<'oneToOne', 'api::employer.employer'>;
     end_date: Schema.Attribute.Date;
     job_requests: Schema.Attribute.Relation<
       'oneToMany',
       'api::job-request.job-request'
     >;
+    job_status: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::job-status.job-status'
+    >;
+    job_type: Schema.Attribute.Relation<'manyToOne', 'api::job-type.job-type'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::job.job'> &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     start_date: Schema.Attribute.Date;
     title: Schema.Attribute.String;
-    type: Schema.Attribute.Enumeration<['part-time', 'full-time']>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    work_mode: Schema.Attribute.Enumeration<['remote', 'on-site', 'hybrid']>;
   };
 }
 
@@ -1036,6 +1101,8 @@ declare module '@strapi/strapi' {
       'api::employee.employee': ApiEmployeeEmployee;
       'api::employer.employer': ApiEmployerEmployer;
       'api::job-request.job-request': ApiJobRequestJobRequest;
+      'api::job-status.job-status': ApiJobStatusJobStatus;
+      'api::job-type.job-type': ApiJobTypeJobType;
       'api::job.job': ApiJobJob;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
